@@ -5,20 +5,20 @@ import 'package:friendly_fire_peripherals/src/infrastructure/keyboards_repositor
 import 'package:test/test.dart';
 
 void main() {
-  group('LocalKeyboardsRepository', () {
-    final libPath = '/home/sandro/Gamebay/gear_tuner/periph_lib/periph.so';
-    final client = LocalDynamicLibraryClient(libPath);
-    final repository = LocalKeyboardsRepository(client);
+  // group('LocalKeyboardsRepository', () {
+  //   final libPath = '/home/sandro/Gamebay/gear_tuner/periph_lib/periph.so';
+  //   final client = LocalDynamicLibraryClient(libPath);
+  //   final repository = LocalKeyboardsRepository(client);
 
-    final keyboard = Keyboard(id: '2ea8:2123', name: 'x');
-    final options = repository.readConfigurationOptions(keyboard);
-    final configuration = KeyboardConfiguration(
-      rgb: options.rgb.random<KeyboardRGB>(),
-    );
+  //   final keyboard = Keyboard(id: '2ea8:2123', name: 'x');
+  //   final options = repository.readConfigurationOptions(keyboard);
+  //   final configuration = KeyboardConfiguration(
+  //     rgb: options.rgb.random<KeyboardRGB>(),
+  //   );
 
-    test('getAll', () {
-      final success = repository.writeConfiguration(keyboard, configuration);
-      expect(success, isTrue);
-    });
-  });
+  //   test('getAll', () {
+  //     final success = repository.writeConfiguration(keyboard, configuration);
+  //     expect(success, isTrue);
+  //   });
+  // });
 }

@@ -4,22 +4,22 @@ import 'package:friendly_fire_peripherals/src/infrastructure/profiles_repository
 import 'package:test/test.dart';
 
 void main() {
-  group('LocalProfilesRepository', () {
-    final libPath = '/home/sandro/Gamebay/gear_tuner/periph_lib/periph.so';
-    final client = LocalDynamicLibraryClient(libPath);
+  // group('LocalProfilesRepository', () {
+  //   final libPath = '/home/sandro/Gamebay/gear_tuner/periph_lib/periph.so';
+  //   final client = LocalDynamicLibraryClient(libPath);
 
-    final repository = LocalProfilesRepository(client);
-    final profile = Profile.fake;
+  //   final repository = LocalProfilesRepository(client);
+  //   final profile = Profile.fake;
 
-    test('save', () async {
-      final success = await repository.save(profile);
-      expect(success, isTrue);
-    });
+  //   test('save', () async {
+  //     final success = await repository.save(profile);
+  //     expect(success, isTrue);
+  //   });
 
-    test('get', () async {
-      final profiles = await repository.get();
-      print('profile: $profiles');
-      expect(profiles.any((p) => p.name == profile.name), isTrue);
-    });
-  });
+  //   test('get', () async {
+  //     final profiles = await repository.get();
+  //     print('profile: $profiles');
+  //     expect(profiles.any((p) => p.name == profile.name), isTrue);
+  //   });
+  // });
 }

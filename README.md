@@ -23,8 +23,8 @@ Then in your Dart code:
 ```dart
 import 'package:friendly_fire_peripherals/friendly_fire_peripherals.dart';
 
-  final libPath = 'path/to/periph-cli-dylib';
-  final manager = PeripheralsManager(dynamicLibraryPath: libPath);
+final libPath = 'path/to/periph-cli-dylib';
+final manager = PeripheralsManager(dynamicLibraryPath: libPath);
 
 final peripherals = manager.getPeripherals();
 print(peripherals);

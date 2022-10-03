@@ -4,24 +4,24 @@ import 'package:friendly_fire_peripherals/src/infrastructure/dynamic_library_cli
 import 'package:test/test.dart';
 
 void main() {
-  group('LocalDevicesRepository', () {
-    final libPath = '/home/sandro/Gamebay/gear_tuner/periph_lib/periph.so';
-    final client = LocalDynamicLibraryClient(libPath);
-    final repository = LocalUniversalRepository(client);
+  // group('LocalDevicesRepository', () {
+  //   final libPath = '/home/sandro/Gamebay/gear_tuner/periph_lib/periph.so';
+  //   final client = LocalDynamicLibraryClient(libPath);
+  //   final repository = LocalUniversalRepository(client);
 
-    test('getDevices', () {
-      final devices = repository.getPeripherals(PeripheralType.all, true);
-      expect(devices, isNotEmpty);
-    });
+  //   test('getDevices', () {
+  //     final devices = repository.getPeripherals(PeripheralType.all, true);
+  //     expect(devices, isNotEmpty);
+  //   });
 
-    test('getProfile', () {
-      repository.getProfile();
-      expect(true, isTrue);
-    });
+  //   test('getProfile', () {
+  //     repository.getProfile();
+  //     expect(true, isTrue);
+  //   });
 
-    test('setProfile', () {
-      final success = repository.setProfile();
-      expect(success, isTrue);
-    });
-  });
+  //   test('setProfile', () {
+  //     final success = repository.setProfile();
+  //     expect(success, isTrue);
+  //   });
+  // });
 }
