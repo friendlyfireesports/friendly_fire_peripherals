@@ -25,7 +25,11 @@ class LocalProfilesRepository extends DynamicLibraryClientConsumer
       if (profiles.isEmpty) {
         return [Profile.defaultProfile];
       } else {
-        return profiles;
+        final hasLocked = profiles.any((profile) => profile.isLocked);
+        if (hasLocked) {
+          return profiles;
+        }
+        return [Profile.defaultProfile, ...profiles];
       }
     } catch (e) {
       return [Profile.defaultProfile];

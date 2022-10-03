@@ -71,7 +71,11 @@ class PeripheralsManager {
   }
 
   Future<List<Profile>> getProfiles() async {
-    return _profilesRepository.get();
+    final profiles = await _profilesRepository.get();
+    for (final profile in profiles) {
+      saveProfile(profile);
+    }
+    return profiles;
   }
 
   Future<bool> saveProfile(Profile profile) async {
