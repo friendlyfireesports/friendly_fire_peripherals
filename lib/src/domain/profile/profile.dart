@@ -61,6 +61,8 @@ class Profile with JsonSerializable {
   final bool isLocked;
   final Map<Peripheral, Configuration> peripherals;
 
+  static get defaultProfile => Profile.fromJson(defaultJson);
+
   List<Peripheral> get peripheralsList => peripherals
       .map(
         (peripheral, configuration) => MapEntry(
@@ -121,3 +123,71 @@ class Profile with JsonSerializable {
   @override
   int get hashCode => name.hashCode;
 }
+
+const defaultJson = <String, dynamic>{
+  "id": 0,
+  "name": "Default",
+  "priority": 0,
+  "is_locked": true,
+  "peripherals": [
+    {
+      "id": "258a:4401",
+      "name": "No-Scope Master GEN 1",
+      "type": "mouse",
+      "configuration": {
+        "rgb": {
+          "mode": "colorful_streaming",
+          "colors": [],
+          "speed": 3,
+          "brightness": null
+        },
+        "pr": 1000,
+        "dpi":
+            "ff0000:400,00ff00:500,0000ff:600,00ffff:800,ffff00:1200,ff00ff:2400"
+      }
+    },
+    {
+      "id": "258a:4402",
+      "name": "No-Scope Master GEN 2",
+      "type": "mouse",
+      "configuration": {
+        "rgb": {
+          "mode": "colorful_streaming",
+          "colors": [],
+          "speed": 3,
+          "brightness": null
+        },
+        "pr": 1000,
+        "dpi":
+            "ff0000:400,00ff00:500,0000ff:600,00ffff:800,ffff00:1200,ff00ff:2400"
+      }
+    },
+    {
+      "id": "2ea8:2123",
+      "name": "Penta Keys GEN 2",
+      "type": "keyboard",
+      "configuration": {
+        "rgb": {
+          "mode": "center_surfing",
+          "colors": [],
+          "speed": 3,
+          "brightness": 5
+        }
+      }
+    },
+    {
+      "id": "0d8c:0024",
+      "name": "Headshot Melody GEN 2",
+      "type": "headset",
+      "configuration": {
+        "speaker": {
+          "mute": 0,
+          "volume": 100,
+          "left_channel_volume": 100,
+          "right_channel_volume": 100
+        },
+        "mic": {"mute": 0, "volume": 100}
+      }
+    }
+  ]
+};

@@ -12,15 +12,24 @@ class LocalProfilesRepository extends DynamicLibraryClientConsumer
   Future<List<Profile>> get() async {
     final profileResponse = client.profile('get');
     if (!profileResponse.success) {
-      return [];
+      return [Profile.defaultProfile];
     }
     var profileJsonList = json.decode(profileResponse.dMessage);
     if (profileJsonList is! List) {
-      return [];
+      return [Profile.defaultProfile];
     }
-    return profileJsonList
-        .map((profileJson) => Profile.fromJson(profileJson))
-        .toList();
+    try {
+      final profiles = profileJsonList
+          .map((profileJson) => Profile.fromJson(profileJson))
+          .toList();
+      if (profiles.isEmpty) {
+        return [Profile.defaultProfile];
+      } else {
+        return profiles;
+      }
+    } catch (e) {
+      return [Profile.defaultProfile];
+    }
   }
 
   @override
@@ -30,7 +39,6 @@ class LocalProfilesRepository extends DynamicLibraryClientConsumer
       profile.id,
       profile.toString(),
     );
-    print(profileResponse.dMessage);
     return profileResponse.success;
   }
 
