@@ -1,6 +1,8 @@
 
 # Friendly Fire Peripherals
 
+[![codecov](https://codecov.io/gh/friendlyfireesports/friendly_fire_peripherals/branch/master/graph/badge.svg?token=6D0IZH4M9H)](https://codecov.io/gh/friendlyfireesports/friendly_fire_peripherals)
+
 A package for managing Friendly Fire peripherals (gear).
 
 - Fully used by Gear Tuner app
