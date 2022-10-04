@@ -55,13 +55,13 @@ class Profile with JsonSerializable {
     );
   }
 
+  factory Profile.fromDefault() => Profile.fromJson(defaultJson);
+
   final int id;
   final String name;
   final int priority;
   final bool isLocked;
   final Map<Peripheral, Configuration> peripherals;
-
-  static get defaultProfile => Profile.fromJson(defaultJson);
 
   List<Peripheral> get peripheralsList => peripherals
       .map(
