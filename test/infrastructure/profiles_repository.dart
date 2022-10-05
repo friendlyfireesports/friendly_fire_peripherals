@@ -19,7 +19,7 @@ void main() {
   //   test('get', () async {
   //     final profiles = await repository.get();
   //     print('profile: $profiles');
-  //     expect(profiles.any((p) => p.name == profile.name), isTrue);
+  //     expect(profiles.any((p) => p == profile), isTrue);
   //   });
   // });
 }

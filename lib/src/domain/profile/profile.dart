@@ -90,7 +90,23 @@ class Profile with JsonSerializable {
   }
 
   bool supports(Peripheral peripheral) =>
-      peripheralsList.indexWhere((p) => p.name == peripheral.name) != -1;
+      peripheralsList.indexWhere((p) => p == peripheral) != -1;
+
+  Profile rectified(List<Peripheral> loadedPeripherals) {
+    for (final loadedPeripheral in loadedPeripherals) {
+      final peripheralKeyIndex = peripherals.keys
+          .toList()
+          .indexWhere((k) => k.id == loadedPeripheral.id);
+      if (peripheralKeyIndex == -1) {
+        continue;
+      }
+      final peripheralKey = peripherals.keys.toList()[peripheralKeyIndex];
+      final configuration = peripherals[peripheralKey]!;
+      peripherals[peripheralKey] =
+          configuration.rectified(loadedPeripheral.configurationOptions);
+    }
+    return this;
+  }
 
   @override
   Profile fromJson(Map<String, dynamic> json) => Profile.fromJson(json);
@@ -118,7 +134,7 @@ class Profile with JsonSerializable {
       };
 
   @override
-  operator ==(Object? other) => other is Profile && other.name == name;
+  operator ==(Object? other) => other is Profile && other.id == id;
 
   @override
   int get hashCode => name.hashCode;

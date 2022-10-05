@@ -102,7 +102,7 @@ class FakeProfilesRepository implements ProfilesRepository {
     if (_profiles == null) {
       return false;
     }
-    final index = _profiles!.indexWhere((p) => p.name == profile.name);
+    final index = _profiles!.indexWhere((p) => p == profile);
     if (index != -1) {
       _profiles![index] = profile;
     } else {
@@ -113,7 +113,7 @@ class FakeProfilesRepository implements ProfilesRepository {
 
   @override
   Future<bool> delete(Profile profile) async {
-    _profiles!.removeWhere((p) => p.name == profile.name);
+    _profiles!.removeWhere((p) => p == profile);
     return true;
   }
 
