@@ -13,12 +13,13 @@ class KeyboardConfiguration extends Configuration {
 
   @override
   KeyboardConfiguration rectified(ConfigurationOptions configurationOptions) {
-    final mode = (configurationOptions as KeyboardConfigurationOptions)
-        .rgb
-        .modes
-        .firstWhere(
-          (mode) => mode.name == rgb.mode,
-        );
+    final options = configurationOptions as KeyboardConfigurationOptions;
+    late RGBMode mode;
+    try {
+      mode = options.rgb.modes.firstWhere((mode) => mode.name == rgb.mode);
+    } catch (_) {
+      mode = options.rgb.modes.first;
+    }
     return KeyboardConfiguration(
       rgb: rgb.rectified(mode),
     );

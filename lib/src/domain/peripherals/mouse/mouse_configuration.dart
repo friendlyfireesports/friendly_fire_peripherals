@@ -35,12 +35,13 @@ class MouseConfiguration extends Configuration {
 
   @override
   MouseConfiguration rectified(ConfigurationOptions configurationOptions) {
-    final mode = (configurationOptions as MouseConfigurationOptions)
-        .rgb
-        .modes
-        .firstWhere(
-          (mode) => mode.name == rgb.mode,
-        );
+    final options = configurationOptions as MouseConfigurationOptions;
+    late RGBMode mode;
+    try {
+      mode = options.rgb.modes.firstWhere((mode) => mode.name == rgb.mode);
+    } catch (_) {
+      mode = options.rgb.modes.first;
+    }
     return MouseConfiguration(
       rgb: rgb.rectified(mode),
       dpi: dpi, // TODO
