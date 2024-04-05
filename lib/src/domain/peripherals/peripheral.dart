@@ -110,7 +110,7 @@ abstract class Peripheral {
       );
 
   @override
-  bool operator ==(Object? other) => other is Peripheral && other.id == id;
+  bool operator ==(Object? other) => other is Peripheral && other.id == id && other.name == name;
 
   @override
   int get hashCode => Object.hash(id, name);
