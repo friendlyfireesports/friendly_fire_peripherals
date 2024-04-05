@@ -192,6 +192,19 @@ const defaultJson = <String, dynamic>{
       }
     },
     {
+      "id": "2ea8:2123",
+      "name": "eSport Arena Penta Keys",
+      "type": "keyboard",
+      "configuration": {
+        "rgb": {
+          "mode": "center_surfing",
+          "colors": [],
+          "speed": 3,
+          "brightness": 5
+        }
+      }
+    },
+    {
       "id": "0d8c:0024",
       "name": "Headshot Melody GEN 2",
       "type": "headset",
