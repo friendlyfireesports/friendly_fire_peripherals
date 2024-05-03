@@ -217,6 +217,20 @@ const defaultJson = <String, dynamic>{
         },
         "mic": {"mute": 0, "volume": 30}
       }
+    },
+    {
+      "id": "0c76:161f",
+      "name": "Whispering Wings GEN 1",
+      "type": "headset",
+      "configuration": {
+        "speaker": {
+          "mute": 0,
+          "volume": 100,
+          "left_channel_volume": 100,
+          "right_channel_volume": 100
+        },
+        "mic": {"mute": 0, "volume": 30}
+      }
     }
   ]
 };
