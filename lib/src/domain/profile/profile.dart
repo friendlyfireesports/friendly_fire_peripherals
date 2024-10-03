@@ -229,7 +229,7 @@ const defaultJson = <String, dynamic>{
           "left_channel_volume": 100,
           "right_channel_volume": 100
         },
-        "mic": {"mute": 0, "volume": 30}
+        "mic": {"mute": 0, "volume": 50}
       }
     }
   ]
