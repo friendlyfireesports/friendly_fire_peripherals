@@ -7,6 +7,7 @@ class Headset extends Peripheral {
     required super.id,
     super.type = PeripheralType.headset,
     required super.name,
+    required super.capabilities,
   });
 
   @override

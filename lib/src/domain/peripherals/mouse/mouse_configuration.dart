@@ -38,7 +38,12 @@ class MouseConfiguration extends Configuration {
     final options = configurationOptions as MouseConfigurationOptions;
     late RGBMode mode;
     try {
-      mode = options.rgb.modes.firstWhere((mode) => mode.name == rgb.mode);
+      if (options.rgb.modes.isEmpty) {
+        mode = RGBMode(
+            name: 'default', colorSpots: 0, speeds: [1], brightnesses: [1]);
+      } else {
+        mode = options.rgb.modes.firstWhere((mode) => mode.name == rgb.mode);
+      }
     } catch (_) {
       mode = options.rgb.modes.first;
     }
@@ -75,13 +80,13 @@ class MouseConfigurationOptions extends ConfigurationOptions {
   final _rng = math.Random();
   int get randomPR => prs[_rng.nextInt(prs.length)];
 
-  factory MouseConfigurationOptions.fromJson(Map<String, dynamic> json) =>
-      MouseConfigurationOptions(
-        rgb: MouseRGBOptions.fromJson(json['rgb']),
-        prs: (json['pr'] as List).map((pr) => int.tryParse(pr) ?? 125).toList(),
-        dpi: MouseDPIOptions.fromJson(json['dpi']),
-      );
-
+  factory MouseConfigurationOptions.fromJson(Map<String, dynamic> json) {
+    return MouseConfigurationOptions(
+      rgb: MouseRGBOptions.fromJson(json['rgb']),
+      prs: (json['pr'] as List).map((pr) => int.tryParse(pr) ?? 125).toList(),
+      dpi: MouseDPIOptions.fromJson(json['dpi']),
+    );
+  }
   @override
   MouseConfigurationOptions fromJson(Map<String, dynamic> json) =>
       MouseConfigurationOptions.fromJson(json);

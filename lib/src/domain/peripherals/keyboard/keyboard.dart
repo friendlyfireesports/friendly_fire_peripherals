@@ -7,6 +7,7 @@ class Keyboard extends Peripheral {
     required super.id,
     super.type = PeripheralType.keyboard,
     required super.name,
+    required super.capabilities,
   });
 
   @override

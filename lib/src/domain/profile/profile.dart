@@ -19,6 +19,7 @@ class Profile with JsonSerializable {
           id: p['id'],
           type: p['type'],
           name: p['name'],
+          capabilities: p['capabilities'],
         );
         peripherals[peripheral] = Configuration.fromJson(
           peripheral.type,
@@ -150,6 +151,12 @@ const defaultJson = <String, dynamic>{
       "id": "258a:4401",
       "name": "No-Scope Master GEN 1",
       "type": "mouse",
+      "capabilities": {
+        "supports_rgb": true,
+        "supports_dpi": true,
+        "supports_polling_rate": true,
+        "supports_lift_off_distance": false
+      },
       "configuration": {
         "rgb": {
           "mode": "colorful_streaming",
@@ -166,6 +173,12 @@ const defaultJson = <String, dynamic>{
       "id": "258a:4402",
       "name": "No-Scope Master GEN 2",
       "type": "mouse",
+      "capabilities": {
+        "supports_rgb": true,
+        "supports_dpi": true,
+        "supports_polling_rate": true,
+        "supports_lift_off_distance": false
+      },
       "configuration": {
         "rgb": {
           "mode": "colorful_streaming",
@@ -179,9 +192,34 @@ const defaultJson = <String, dynamic>{
       }
     },
     {
+      "id": "258a:4403",
+      "name": "Shadowcat",
+      "type": "mouse",
+      "capabilities": {
+        "supports_rgb": false,
+        "supports_dpi": true,
+        "supports_polling_rate": true,
+        "supports_lift_off_distance": true
+      },
+      "configuration": {
+        "rgb": {
+          "mode": "colorful_streaming",
+          "colors": [],
+          "speed": 3,
+          "brightness": null
+        },
+        "pr": 1000,
+        "dpi":
+            "ff0000:400,ff8000:500,ffff00:600,00ff00:800,00ffff:1200"
+      }
+    },
+    {
       "id": "2ea8:2123",
       "name": "Penta Keys GEN 2",
       "type": "keyboard",
+      "capabilities": {
+        "supports_rgb": true
+      },
       "configuration": {
         "rgb": {
           "mode": "center_surfing",
@@ -195,6 +233,9 @@ const defaultJson = <String, dynamic>{
       "id": "2ea8:2123",
       "name": "eSport Arena Penta Keys",
       "type": "keyboard",
+      "capabilities": {
+        "supports_rgb": true
+      },
       "configuration": {
         "rgb": {
           "mode": "center_surfing",
@@ -208,6 +249,9 @@ const defaultJson = <String, dynamic>{
       "id": "0d8c:0024",
       "name": "Headshot Melody GEN 2",
       "type": "headset",
+      "capabilities": {
+        "supports_all": true
+      },
       "configuration": {
         "speaker": {
           "mute": 0,
@@ -222,6 +266,9 @@ const defaultJson = <String, dynamic>{
       "id": "0c76:161f",
       "name": "Whispering Wings GEN 1",
       "type": "headset",
+      "capabilities": {
+        "supports_all": true
+      },
       "configuration": {
         "speaker": {
           "mute": 0,

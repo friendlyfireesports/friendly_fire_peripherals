@@ -50,6 +50,10 @@ abstract class PeripheralRGB with JsonSerializable {
           brightness: json['brightness'],
         );
       case PeripheralType.mouse:
+      if (json['feature'] != null) 
+        { 
+          return MouseRGB(mode: '{"none": "none"}', colors: List.empty(), speed: 0, brightness: 0); 
+          }
         return MouseRGB(
           mode: json['mode'],
           colors: ((json['colors'] ?? []) as List)
@@ -124,6 +128,9 @@ abstract class PeripheralRGBOptions extends ConfigurationOptions {
               .toList(),
         );
       case PeripheralType.mouse:
+        if (json['feature'] != null) {
+          return MouseRGBOptions(colors: List.empty(), modes: List.empty());
+        }
         return MouseRGBOptions(
           colors: json['predefined_colors'] != null
               ? List<String>.from(json['predefined_colors'])

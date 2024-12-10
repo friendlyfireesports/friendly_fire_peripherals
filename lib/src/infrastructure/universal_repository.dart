@@ -21,15 +21,16 @@ class LocalUniversalRepository extends DynamicLibraryClientConsumer
         for (var json in list) {
           devices.add(
             Peripheral.fromStrings(
-              id: json['vid_pid'],
-              type: key,
-              name: json['name'],
-            ),
+                id: json['vid_pid'],
+                type: key,
+                name: json['name'],
+                capabilities: (json['capabilities'] as Map<String, dynamic>?)
+                        ?.map((key, value) => MapEntry(key, value as bool)) ??
+                    {}),
           );
         }
       }
     });
-
     return devices;
   }
 

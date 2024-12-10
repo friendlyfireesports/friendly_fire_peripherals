@@ -7,7 +7,11 @@ class Mouse extends Peripheral {
     required super.id,
     super.type = PeripheralType.mouse,
     required super.name,
+    required super.capabilities,
   });
+
+  bool get supportsRGB => capabilities['supports_rgb'] ?? false;
+  bool get supportsDPI => capabilities['supports_dpi'] ?? false;
 
   @override
   MouseConfiguration get configuration => config as MouseConfiguration;

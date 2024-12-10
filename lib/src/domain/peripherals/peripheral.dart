@@ -17,12 +17,14 @@ abstract class Peripheral {
     required this.id,
     required this.type,
     required this.name,
+    required this.capabilities,
     this.image,
   });
 
   final String id;
   final PeripheralType type;
   final String name;
+  final Map<String, bool> capabilities;
   final String? image;
 
   late Configuration config;
@@ -40,11 +42,12 @@ abstract class Peripheral {
     required String id,
     required String type,
     required String name,
+    required Map<String, bool> capabilities,
     bool withFakeConfiguration = false,
   }) {
     switch (type) {
       case 'keyboard':
-        final keyboard = Keyboard(id: id, name: name);
+        final keyboard = Keyboard(id: id, name: name, capabilities: capabilities);
         if (withFakeConfiguration) {
           final repository = FakeKeyboardsRepository();
           keyboard.configOptions =
@@ -53,7 +56,7 @@ abstract class Peripheral {
         }
         return keyboard;
       case 'mouse':
-        final mouse = Mouse(id: id, name: name);
+        final mouse = Mouse(id: id, name: name, capabilities: capabilities);
         if (withFakeConfiguration) {
           final repository = FakeMouseRepository();
           mouse.configOptions = repository.readConfigurationOptions(mouse);
@@ -61,7 +64,7 @@ abstract class Peripheral {
         }
         return mouse;
       case 'headset':
-        final headset = Headset(id: id, name: name);
+        final headset = Headset(id: id, name: name, capabilities: capabilities);
         if (withFakeConfiguration) {
           final repository = FakeHeadsetRepository();
           headset.configOptions = repository.readConfigurationOptions(headset);
@@ -83,6 +86,7 @@ abstract class Peripheral {
             : faker.randomGenerator.boolean()
                 ? 'keyboard'
                 : 'headset',
+        capabilities: {'supports_rgb': true},
         withFakeConfiguration: true,
       );
 
@@ -106,6 +110,7 @@ abstract class Peripheral {
           'id': id,
           'type': type.name,
           'name': name,
+          'capabilities': capabilities,
         },
       );
 
