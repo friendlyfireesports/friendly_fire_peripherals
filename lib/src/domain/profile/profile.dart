@@ -19,7 +19,7 @@ class Profile with JsonSerializable {
           id: p['id'],
           type: p['type'],
           name: p['name'],
-          capabilities: p['capabilities'],
+          capabilities: p['capabilities'] ?? {},
         );
         peripherals[peripheral] = Configuration.fromJson(
           peripheral.type,

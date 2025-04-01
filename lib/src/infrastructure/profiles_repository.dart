@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:friendly_fire_peripherals/src/domain/core/dynamic_library_client_consumer.dart';
 import 'package:friendly_fire_peripherals/src/domain/profile/profile.dart';
@@ -31,7 +32,8 @@ class LocalProfilesRepository extends DynamicLibraryClientConsumer
         }
         return [Profile.fromDefault(), ...profiles];
       }
-    } catch (e) {
+    } catch (e, st) {
+      log('CLI profile parse error $e', stackTrace: st);
       return [Profile.fromDefault()];
     }
   }
