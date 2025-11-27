@@ -57,7 +57,14 @@ class KeyboardRGB extends PeripheralRGB {
     List<int>? colors,
     int? speed,
     int? brightness,
-  }) : super(mode: mode, colors: colors, speed: speed, brightness: brightness);
+    bool? shining,
+  }) : super(
+          mode: mode,
+          colors: colors,
+          speed: speed,
+          brightness: brightness,
+          shining: shining,
+        );
 
   factory KeyboardRGB.fromJson(Map<String, dynamic> json) =>
       PeripheralRGB.fromJson(json, PeripheralType.keyboard) as KeyboardRGB;
@@ -67,12 +74,14 @@ class KeyboardRGB extends PeripheralRGB {
     List<int>? colors,
     int? speed,
     int? brightness,
+    bool? shining,
   }) =>
       KeyboardRGB(
         mode: mode ?? this.mode,
         colors: colors ?? this.colors,
         speed: speed ?? this.speed,
         brightness: brightness ?? this.brightness,
+        shining: shining ?? this.shining,
       );
 
   @override
@@ -84,6 +93,7 @@ class KeyboardRGB extends PeripheralRGB {
       brightness: mode.isValidBrightness(brightness)
           ? brightness
           : mode.defaultBrightness,
+      shining: mode.isValidShining(shining) ? shining : mode.defaultShining,
     );
   }
 

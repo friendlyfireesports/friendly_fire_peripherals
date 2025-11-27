@@ -29,7 +29,9 @@ typedef RGBNative = Response Function(
   Chars color,
   Int speed,
   Int brightness,
+  Bool shining,
 );
+
 typedef RGB = Response Function(
   Chars id,
   Chars action,
@@ -37,6 +39,7 @@ typedef RGB = Response Function(
   Chars color,
   int speed,
   int brightness,
+  bool shining,
 );
 
 typedef PRDPINative = Response Function(

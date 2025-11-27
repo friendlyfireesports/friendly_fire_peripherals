@@ -35,6 +35,7 @@ class LocalDynamicLibraryClient extends DynamicLibraryClient {
     String? color,
     int? speed,
     int? brightness,
+    bool? shining,
   ]) {
     final keyboardRGB =
         _dynamicLibrary.lookupFunction<RGBNative, RGB>('KeyboardRGB');
@@ -45,8 +46,17 @@ class LocalDynamicLibraryClient extends DynamicLibraryClient {
     final nColor = (color ?? '').toNativeUtf8();
     final nSpeed = speed ?? 0;
     final nBrightness = brightness ?? 0;
+    final nShining = shining ?? false;
 
-    return keyboardRGB(nId, nAction, nMode, nColor, nSpeed, nBrightness);
+    return keyboardRGB(
+      nId,
+      nAction,
+      nMode,
+      nColor,
+      nSpeed,
+      nBrightness,
+      nShining,
+    );
   }
 
   @override
@@ -67,7 +77,7 @@ class LocalDynamicLibraryClient extends DynamicLibraryClient {
     final nSpeed = speed ?? 0;
     final nBrightness = brightness ?? 0;
 
-    return mouseRGB(nId, nAction, nMode, nColor, nSpeed, nBrightness);
+    return mouseRGB(nId, nAction, nMode, nColor, nSpeed, nBrightness, false);
   }
 
   @override

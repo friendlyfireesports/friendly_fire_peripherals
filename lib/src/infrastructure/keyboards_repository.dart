@@ -47,6 +47,7 @@ class LocalKeyboardsRepository extends DynamicLibraryClientConsumer
       configuration.rgb.stringifiedColors,
       configuration.rgb.speed,
       configuration.rgb.brightness,
+      configuration.rgb.shining,
     );
     if (!response.success) {
       // return false;

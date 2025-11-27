@@ -16,6 +16,7 @@ abstract class DynamicLibraryClient {
     String? color,
     int? speed,
     int? brightness,
+    bool? shining,
   ]);
 
   Response mouseRGB(
