@@ -127,4 +127,56 @@ class LocalDynamicLibraryClient extends DynamicLibraryClient {
 
     return headset(nAction, nKey, nValue);
   }
+
+  @override
+  Response keyboardPR(
+    String id,
+    String action, [
+    String? pr,
+  ]) {
+    final keyboardPR =
+        _dynamicLibrary.lookupFunction<PRNative, PRDart>('KeyboardPollingRate');
+
+    final nId = id.toNativeUtf8();
+    final nAction = action.toNativeUtf8();
+    final nPR = int.tryParse((pr ?? '').split('=').last) ?? 8000;
+
+    return keyboardPR(nId, nAction, nPR);
+  }
+
+  @override
+  Response keyboardTD(
+    String id,
+    String action, [
+    String? td,
+  ]) {
+    final keyboardTD = _dynamicLibrary
+        .lookupFunction<TDNative, TDDart>('KeyboardTravelDistance');
+
+    final nId = id.toNativeUtf8();
+    final nAction = action.toNativeUtf8();
+    final nTD = double.tryParse((td ?? '').split('=').last) ?? 0.2;
+
+    return keyboardTD(nId, nAction, nTD);
+  }
+
+  @override
+  Response keyboardDZ(
+    String id,
+    String action, [
+    String? topValue,
+    String? bottomValue,
+  ]) {
+    final keyboardDZ =
+        _dynamicLibrary.lookupFunction<DZNative, DZDart>('KeyboardDeadzone');
+
+    final nId = id.toNativeUtf8();
+    final nAction = action.toNativeUtf8();
+    topValue = topValue?.split("=").skip(1).join("");
+    bottomValue = bottomValue?.split("=").skip(1).join("");
+    final nTop = double.tryParse(topValue ?? '0.1') ?? 0.1;
+    final nBottom = double.tryParse(bottomValue ?? '0.3') ?? 0.3;
+
+    return keyboardDZ(nId, nAction, nTop, nBottom);
+  }
 }

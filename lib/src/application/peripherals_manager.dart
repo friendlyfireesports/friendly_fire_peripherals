@@ -65,7 +65,7 @@ class PeripheralsManager {
 
     final repository = _chooseRepository(peripheral);
     return Future.delayed(
-      const Duration(milliseconds: 100),
+      const Duration(milliseconds: 2000),
       () => repository.writeConfiguration(peripheral, rectifiedConfiguration),
     );
   }
