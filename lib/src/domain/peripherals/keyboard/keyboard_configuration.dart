@@ -17,15 +17,19 @@ class KeyboardConfiguration extends Configuration {
   final double? td;
   final Deadzone? dz;
 
-  factory KeyboardConfiguration.fromJson(Map<String, dynamic> json) =>
-      KeyboardConfiguration(
-        rgb: KeyboardRGB.fromJson(json['rgb']),
-        pr: json['pr'] is int ? json['pr'] : (json['pr']?['value'] ?? 8000),
-        td: json['td'] is double
-            ? json['td']
-            : ((json['td']?['value'] ?? 2.0) as num).toDouble(),
-        dz: json['dz'] is Deadzone ? json['dz'] : Deadzone.fromJson(json),
-      );
+  factory KeyboardConfiguration.fromJson(Map<String, dynamic> json) {
+    if ((json['pr'] ?? json['td'] ?? json['dz']) == null) {
+      return KeyboardConfiguration(rgb: KeyboardRGB.fromJson(json['rgb']));
+    }
+    return KeyboardConfiguration(
+      rgb: KeyboardRGB.fromJson(json['rgb']),
+      pr: json['pr'] is int ? json['pr'] : (json['pr']?['value'] ?? 8000),
+      td: json['td'] is num
+          ? (json['td'] as num).toDouble()
+          : ((json['td']?['value'] ?? 2.0) as num).toDouble(),
+      dz: Deadzone.fromJson(json['dz']),
+    );
+  }
 
   KeyboardConfiguration copyWith({
     KeyboardRGB? rgb,
