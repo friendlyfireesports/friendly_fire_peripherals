@@ -16,6 +16,7 @@ abstract class DynamicLibraryClient {
     String? color,
     int? speed,
     int? brightness,
+    bool? shining,
   ]);
 
   Response mouseRGB(
@@ -37,6 +38,28 @@ abstract class DynamicLibraryClient {
     String id,
     String action, [
     String? dpi,
+  ]);
+
+  /// Keyboard polling rate
+  Response keyboardPR(
+    String id,
+    String action, [
+    String? pr,
+  ]);
+
+  /// Keyboard travel distance
+  Response keyboardTD(
+    String id,
+    String action, [
+    String? dpi,
+  ]);
+
+  /// Keyboard deadzones
+  Response keyboardDZ(
+    String id,
+    String action, [
+    String? top,
+    String? bottom,
   ]);
 
   Response profile(

@@ -24,5 +24,17 @@ class Keyboard extends Peripheral {
   @override
   KeyboardConfiguration get randomConfiguration => KeyboardConfiguration(
         rgb: configurationOptions.rgb.random<KeyboardRGB>(),
+        pr: configurationOptions.randomPR,
+        td: configurationOptions.randomTD,
+        dz: configurationOptions.randomDZ,
       );
+}
+
+extension SupportedCapabilities on Keyboard {
+  bool get supportsShining => capabilities['supports_shining'] ?? false;
+  bool get supportsPollingRate =>
+      capabilities['supports_polling_rate'] ?? false;
+  bool get supportsTravelDistance =>
+      capabilities['supports_travel_distance'] ?? false;
+  bool get supportsDeadzones => capabilities['supports_deadzones'] ?? false;
 }

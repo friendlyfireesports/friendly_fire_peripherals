@@ -209,17 +209,14 @@ const defaultJson = <String, dynamic>{
           "brightness": null
         },
         "pr": 1000,
-        "dpi":
-            "ff0000:400,ff8000:500,ffff00:600,00ff00:800,00ffff:1200"
+        "dpi": "ff0000:400,ff8000:500,ffff00:600,00ff00:800,00ffff:1200"
       }
     },
     {
       "id": "2ea8:2123",
       "name": "Penta Keys GEN 2",
       "type": "keyboard",
-      "capabilities": {
-        "supports_rgb": true
-      },
+      "capabilities": {"supports_rgb": true},
       "configuration": {
         "rgb": {
           "mode": "center_surfing",
@@ -233,9 +230,7 @@ const defaultJson = <String, dynamic>{
       "id": "2ea8:2123",
       "name": "eSport Arena Penta Keys",
       "type": "keyboard",
-      "capabilities": {
-        "supports_rgb": true
-      },
+      "capabilities": {"supports_rgb": true},
       "configuration": {
         "rgb": {
           "mode": "center_surfing",
@@ -246,12 +241,36 @@ const defaultJson = <String, dynamic>{
       }
     },
     {
+      "id": "2ea8:2124",
+      "name": "Hammerwolf",
+      "type": "keyboard",
+      "capabilities": {
+        "supports_rgb": true,
+        "supports_polling_rate": true,
+        "supports_travel_distance": true,
+        "supports_deadzone": true,
+      },
+      "configuration": {
+        "rgb": {
+          "mode": "circle_wave",
+          "colors": [],
+          "speed": 3,
+          "brightness": 3,
+          "shining": true,
+        },
+        "travel_distance": 2,
+        "polling_rate": 8000,
+        "deadzone": {
+          "topValue": 0.1,
+          "bottomValue": 0.3,
+        }
+      }
+    },
+    {
       "id": "0d8c:0024",
       "name": "Headshot Melody GEN 2",
       "type": "headset",
-      "capabilities": {
-        "supports_all": true
-      },
+      "capabilities": {"supports_all": true},
       "configuration": {
         "speaker": {
           "mute": 0,
@@ -266,9 +285,7 @@ const defaultJson = <String, dynamic>{
       "id": "0c76:161f",
       "name": "Whispering Wings GEN 1",
       "type": "headset",
-      "capabilities": {
-        "supports_all": true
-      },
+      "capabilities": {"supports_all": true},
       "configuration": {
         "speaker": {
           "mute": 0,

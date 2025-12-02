@@ -33,6 +33,7 @@ abstract class PeripheralRGB with JsonSerializable {
     this.colors,
     this.speed,
     this.brightness,
+    this.shining,
   });
 
   factory PeripheralRGB.fromJson(
@@ -48,12 +49,17 @@ abstract class PeripheralRGB with JsonSerializable {
               .toList(),
           speed: json['speed'],
           brightness: json['brightness'],
+          shining: json['shining'],
         );
       case PeripheralType.mouse:
-      if (json['feature'] != null) 
-        { 
-          return MouseRGB(mode: '{"none": "none"}', colors: List.empty(), speed: 0, brightness: 0); 
-          }
+        if (json['feature'] != null) {
+          return MouseRGB(
+            mode: '{"none": "none"}',
+            colors: List.empty(),
+            speed: 0,
+            brightness: 0,
+          );
+        }
         return MouseRGB(
           mode: json['mode'],
           colors: ((json['colors'] ?? []) as List)
@@ -72,6 +78,7 @@ abstract class PeripheralRGB with JsonSerializable {
   final List<int>? colors;
   final int? speed;
   final int? brightness;
+  final bool? shining;
 
   String? get stringifiedColors =>
       colors?.map((c) => intColorToHex(c)).join(',');
@@ -87,6 +94,7 @@ abstract class PeripheralRGB with JsonSerializable {
         'colors': colors?.map((c) => intColorToHex(c)).toList(),
         'speed': speed,
         'brightness': brightness,
+        if (shining != null) 'shining': shining,
       };
 
   @override
@@ -166,6 +174,7 @@ abstract class PeripheralRGBOptions extends ConfigurationOptions {
         brightness: mode.brightnesses.isNotEmpty
             ? mode.brightnesses[_rng.nextInt(mode.brightnesses.length)]
             : null,
+        shining: _rng.nextBool(),
       ) as T;
     }
     if (T == MouseRGB) {
@@ -204,17 +213,20 @@ class RGBMode with JsonSerializable {
     required this.colorSpots,
     required this.speeds,
     required this.brightnesses,
+    this.shining = false, // TODO(slovnicki): model this
   });
 
   final String name;
   final int colorSpots;
   final List<int> speeds;
   final List<int> brightnesses;
+  final bool shining;
 
   List<int> get defaultColors => List.generate(colorSpots, (_) => 0xffff0000);
   int? get defaultSpeed => speeds.isNotEmpty ? speeds.first : null;
   int? get defaultBrightness =>
       brightnesses.isNotEmpty ? brightnesses.first : null;
+  bool? get defaultShining => true;
 
   String get features =>
       '${colorSpots > 0 ? 'C' : ''}${speeds.isNotEmpty ? 'S' : ''}${brightnesses.isNotEmpty ? 'B' : ''}';
@@ -224,6 +236,7 @@ class RGBMode with JsonSerializable {
         colorSpots: json['color_spots'],
         speeds: List<int>.from(json['speed']),
         brightnesses: List<int>.from(json['brightness']),
+        shining: json['shining'] ?? false,
       );
 
   bool isValidRGB(PeripheralRGB rgb) =>
@@ -239,6 +252,7 @@ class RGBMode with JsonSerializable {
   bool isValidBrightness(int? brightness) =>
       (brightness == null && brightnesses.isEmpty) ||
       brightnesses.contains(brightness);
+  bool isValidShining(bool? shining) => shining != null;
 
   @override
   RGBMode fromJson(Map<String, dynamic> json) =>
@@ -250,5 +264,6 @@ class RGBMode with JsonSerializable {
         'color_spots': colorSpots,
         'speeds': speeds,
         'brightnesses': brightnesses,
+        'shining': shining,
       };
 }

@@ -47,7 +47,10 @@ abstract class Peripheral {
   }) {
     switch (type) {
       case 'keyboard':
-        final keyboard = Keyboard(id: id, name: name, capabilities: capabilities);
+        final keyboard = Keyboard(
+            id: id,
+            name: id == '2ea8:2124' ? 'Hammerwolf' : name,
+            capabilities: capabilities);
         if (withFakeConfiguration) {
           final repository = FakeKeyboardsRepository();
           keyboard.configOptions =
@@ -115,7 +118,8 @@ abstract class Peripheral {
       );
 
   @override
-  bool operator ==(Object? other) => other is Peripheral && other.id == id && other.name == name;
+  bool operator ==(Object? other) =>
+      other is Peripheral && other.id == id && other.name == name;
 
   @override
   int get hashCode => Object.hash(id, name);
