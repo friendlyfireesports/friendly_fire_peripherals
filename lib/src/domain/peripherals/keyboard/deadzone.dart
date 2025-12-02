@@ -6,7 +6,6 @@ class Deadzone with JsonSerializable {
   final double? bottom;
 
   factory Deadzone.fromJson(Map<String, dynamic> json) {
-    // Handle when dz is nested
     final dzData = json.containsKey('dz') ? json['dz'] : json;
     return Deadzone(
       top: dzData['topValue'] != null

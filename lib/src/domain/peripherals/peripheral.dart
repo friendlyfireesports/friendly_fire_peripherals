@@ -47,8 +47,10 @@ abstract class Peripheral {
   }) {
     switch (type) {
       case 'keyboard':
-        final keyboard =
-            Keyboard(id: id, name: name, capabilities: capabilities);
+        final keyboard = Keyboard(
+            id: id,
+            name: id == '2ea8:2124' ? 'Hammerwolf' : name,
+            capabilities: capabilities);
         if (withFakeConfiguration) {
           final repository = FakeKeyboardsRepository();
           keyboard.configOptions =
