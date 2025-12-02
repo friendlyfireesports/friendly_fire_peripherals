@@ -21,13 +21,16 @@ class KeyboardConfiguration extends Configuration {
     if ((json['pr'] ?? json['td'] ?? json['dz']) == null) {
       return KeyboardConfiguration(rgb: KeyboardRGB.fromJson(json['rgb']));
     }
+    final pr = json['pr'] ?? json['polling_rate'];
+    final td = json['td'] ?? json['travel_distance'];
+    final dz = json['dz'] ?? json['deadzone'];
     return KeyboardConfiguration(
       rgb: KeyboardRGB.fromJson(json['rgb']),
-      pr: json['pr'] is int ? json['pr'] : (json['pr']?['value'] ?? 8000),
-      td: json['td'] is num
-          ? (json['td'] as num).toDouble()
-          : ((json['td']?['value'] ?? 2.0) as num).toDouble(),
-      dz: Deadzone.fromJson(json['dz']),
+      pr: pr is int ? pr : (pr?['value'] ?? 8000),
+      td: td is num
+          ? (td as num).toDouble()
+          : ((td?['value'] ?? 2.0) as num).toDouble(),
+      dz: Deadzone.fromJson(dz),
     );
   }
 
