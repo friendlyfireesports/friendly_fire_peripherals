@@ -18,12 +18,12 @@ class KeyboardConfiguration extends Configuration {
   final Deadzone? dz;
 
   factory KeyboardConfiguration.fromJson(Map<String, dynamic> json) {
-    if ((json['pr'] ?? json['td'] ?? json['dz']) == null) {
-      return KeyboardConfiguration(rgb: KeyboardRGB.fromJson(json['rgb']));
-    }
     final pr = json['pr'] ?? json['polling_rate'];
     final td = json['td'] ?? json['travel_distance'];
     final dz = json['dz'] ?? json['deadzone'];
+    if ((pr ?? td ?? dz) == null) {
+      return KeyboardConfiguration(rgb: KeyboardRGB.fromJson(json['rgb']));
+    }
     return KeyboardConfiguration(
       rgb: KeyboardRGB.fromJson(json['rgb']),
       pr: pr is int ? pr : (pr?['value'] ?? 8000),
