@@ -30,7 +30,7 @@ class KeyboardConfiguration extends Configuration {
       td: td is num
           ? (td as num).toDouble()
           : ((td?['value'] ?? 2.0) as num).toDouble(),
-      dz: Deadzone.fromJson(dz),
+      dz: dz == null ? Deadzone(top: 0.1, bottom: 0.3) : Deadzone.fromJson(dz),
     );
   }
 
