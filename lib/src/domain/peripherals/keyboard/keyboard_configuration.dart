@@ -27,9 +27,7 @@ class KeyboardConfiguration extends Configuration {
     return KeyboardConfiguration(
       rgb: KeyboardRGB.fromJson(json['rgb']),
       pr: pr is int ? pr : (pr?['value'] ?? 8000),
-      td: td is num
-          ? (td as num).toDouble()
-          : ((td?['value'] ?? 2.0) as num).toDouble(),
+      td: td is num ? td.toDouble() : ((td?['value'] ?? 2.0) as num).toDouble(),
       dz: dz == null ? Deadzone(top: 0.1, bottom: 0.3) : Deadzone.fromJson(dz),
     );
   }
@@ -80,29 +78,34 @@ class KeyboardConfiguration extends Configuration {
 class KeyboardConfigurationOptions extends ConfigurationOptions {
   KeyboardConfigurationOptions({
     required this.rgb,
-    required this.prs,
-    required this.td,
-    required this.dz,
+    this.prs,
+    this.td,
+    this.dz,
   });
 
   final KeyboardRGBOptions rgb;
-  final List<int> prs;
-  final KeyboardTravelDistanceOptions td;
-  final KeyboardDeadzoneOptions dz;
+  final List<int>? prs;
+  final KeyboardTravelDistanceOptions? td;
+  final KeyboardDeadzoneOptions? dz;
 
   final _rng = math.Random();
-  int get randomPR => prs[_rng.nextInt(prs.length)];
-  double get randomTD => td.random;
-  Deadzone get randomDZ => dz.random;
+  int? get randomPR => prs?[_rng.nextInt(prs?.length ?? 0)];
+  double? get randomTD => td?.random;
+  Deadzone? get randomDZ => dz?.random;
 
   factory KeyboardConfigurationOptions.fromJson(Map<String, dynamic> json) =>
       KeyboardConfigurationOptions(
         rgb: KeyboardRGBOptions.fromJson(json['rgb']),
-        prs: (json['pr'] as List).map((pr) => pr as int).toList(),
-        td: KeyboardTravelDistanceOptions.fromJson(json['td']),
-        dz: KeyboardDeadzoneOptions.fromJson(json['dz']),
+        prs: json['pr'] is List
+            ? (json['pr'] as List).map((pr) => pr as int).toList()
+            : null,
+        td: json['td']['min_value'] is num
+            ? KeyboardTravelDistanceOptions.fromJson(json['td'])
+            : null,
+        dz: json['dz']['min_value'] is num
+            ? KeyboardDeadzoneOptions.fromJson(json['dz'])
+            : null,
       );
-
   @override
   KeyboardConfiguration fromJson(Map<String, dynamic> json) =>
       KeyboardConfiguration.fromJson(json);
@@ -110,9 +113,9 @@ class KeyboardConfigurationOptions extends ConfigurationOptions {
   @override
   Map<String, dynamic> toJson() => {
         'rgb': rgb.toJson(),
-        'prs': prs,
-        'td': td.toJson(),
-        'dz': dz.toJson(),
+        if (prs != null) 'prs': prs,
+        if (td != null) 'td': td?.toJson(),
+        if (dz != null) 'dz': dz?.toJson(),
       };
 }
 
