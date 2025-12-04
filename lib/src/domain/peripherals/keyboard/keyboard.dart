@@ -37,4 +37,5 @@ extension SupportedCapabilities on Keyboard {
   bool get supportsTravelDistance =>
       capabilities['supports_travel_distance'] ?? false;
   bool get supportsDeadzones => capabilities['supports_deadzones'] ?? false;
+  bool get supportsLowCoins => capabilities['supports_low_coins'] ?? false;
 }

@@ -155,7 +155,7 @@ class LocalDynamicLibraryClient extends DynamicLibraryClient {
 
     final nId = id.toNativeUtf8();
     final nAction = action.toNativeUtf8();
-    final nTD = double.tryParse((td ?? '').split('=').last) ?? 0.2;
+    final nTD = double.tryParse((td ?? '').split('=').last) ?? 2.0;
 
     return keyboardTD(nId, nAction, nTD);
   }

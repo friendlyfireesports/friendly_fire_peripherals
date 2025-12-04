@@ -258,7 +258,7 @@ const defaultJson = <String, dynamic>{
           "brightness": 3,
           "shining": true,
         },
-        "travel_distance": 2,
+        "travel_distance": 2.0,
         "polling_rate": 8000,
         "deadzone": {
           "topValue": 0.1,

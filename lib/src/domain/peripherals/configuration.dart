@@ -49,7 +49,7 @@ abstract class PeripheralRGB with JsonSerializable {
               .toList(),
           speed: json['speed'],
           brightness: json['brightness'],
-          shining: json['shining'],
+          shining: ((json['colors'] ?? []) as List).isEmpty,
         );
       case PeripheralType.mouse:
         if (json['feature'] != null) {

@@ -18,16 +18,17 @@ class KeyboardConfiguration extends Configuration {
   final Deadzone? dz;
 
   factory KeyboardConfiguration.fromJson(Map<String, dynamic> json) {
-    if ((json['pr'] ?? json['td'] ?? json['dz']) == null) {
+    final pr = json['pr'] ?? json['polling_rate'];
+    final td = json['travel_distance'] ?? json['travel_distance'];
+    final dz = json['dz'] ?? json['deadzone'];
+    if ((pr ?? td ?? dz) == null) {
       return KeyboardConfiguration(rgb: KeyboardRGB.fromJson(json['rgb']));
     }
     return KeyboardConfiguration(
       rgb: KeyboardRGB.fromJson(json['rgb']),
-      pr: json['pr'] is int ? json['pr'] : (json['pr']?['value'] ?? 8000),
-      td: json['td'] is num
-          ? (json['td'] as num).toDouble()
-          : ((json['td']?['value'] ?? 2.0) as num).toDouble(),
-      dz: Deadzone.fromJson(json['dz']),
+      pr: pr is int ? pr : (pr?['value'] ?? 8000),
+      td: td is num ? td.toDouble() : ((td?['value'] ?? 2.0) as num).toDouble(),
+      dz: dz == null ? Deadzone(top: 0.1, bottom: 0.3) : Deadzone.fromJson(dz),
     );
   }
 
@@ -69,7 +70,7 @@ class KeyboardConfiguration extends Configuration {
   Map<String, dynamic> toJson() => {
         'rgb': rgb.toJson(),
         if (pr != null) 'pr': pr,
-        if (td != null) 'td': td,
+        if (td != null) 'travel_distance': td,
         if (dz != null) 'dz': dz!.toJson(),
       };
 }
@@ -77,29 +78,34 @@ class KeyboardConfiguration extends Configuration {
 class KeyboardConfigurationOptions extends ConfigurationOptions {
   KeyboardConfigurationOptions({
     required this.rgb,
-    required this.prs,
-    required this.td,
-    required this.dz,
+    this.prs,
+    this.td,
+    this.dz,
   });
 
   final KeyboardRGBOptions rgb;
-  final List<int> prs;
-  final KeyboardTravelDistanceOptions td;
-  final KeyboardDeadzoneOptions dz;
+  final List<int>? prs;
+  final KeyboardTravelDistanceOptions? td;
+  final KeyboardDeadzoneOptions? dz;
 
   final _rng = math.Random();
-  int get randomPR => prs[_rng.nextInt(prs.length)];
-  double get randomTD => td.random;
-  Deadzone get randomDZ => dz.random;
+  int? get randomPR => prs?[_rng.nextInt(prs?.length ?? 0)];
+  double? get randomTD => td?.random;
+  Deadzone? get randomDZ => dz?.random;
 
   factory KeyboardConfigurationOptions.fromJson(Map<String, dynamic> json) =>
       KeyboardConfigurationOptions(
         rgb: KeyboardRGBOptions.fromJson(json['rgb']),
-        prs: (json['pr'] as List).map((pr) => pr as int).toList(),
-        td: KeyboardTravelDistanceOptions.fromJson(json['td']),
-        dz: KeyboardDeadzoneOptions.fromJson(json['dz']),
+        prs: json['pr'] is List
+            ? (json['pr'] as List).map((pr) => pr as int).toList()
+            : null,
+        td: json['travel_distance']['min_value'] is num
+            ? KeyboardTravelDistanceOptions.fromJson(json['travel_distance'])
+            : null,
+        dz: json['dz']['min_value'] is num
+            ? KeyboardDeadzoneOptions.fromJson(json['dz'])
+            : null,
       );
-
   @override
   KeyboardConfiguration fromJson(Map<String, dynamic> json) =>
       KeyboardConfiguration.fromJson(json);
@@ -107,9 +113,9 @@ class KeyboardConfigurationOptions extends ConfigurationOptions {
   @override
   Map<String, dynamic> toJson() => {
         'rgb': rgb.toJson(),
-        'prs': prs,
-        'td': td.toJson(),
-        'dz': dz.toJson(),
+        if (prs != null) 'prs': prs,
+        if (td != null) 'travel_distance': td?.toJson(),
+        if (dz != null) 'dz': dz?.toJson(),
       };
 }
 
