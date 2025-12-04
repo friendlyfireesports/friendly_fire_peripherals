@@ -19,7 +19,7 @@ class KeyboardConfiguration extends Configuration {
 
   factory KeyboardConfiguration.fromJson(Map<String, dynamic> json) {
     final pr = json['pr'] ?? json['polling_rate'];
-    final td = json['td'] ?? json['travel_distance'];
+    final td = json['travel_distance'] ?? json['travel_distance'];
     final dz = json['dz'] ?? json['deadzone'];
     if ((pr ?? td ?? dz) == null) {
       return KeyboardConfiguration(rgb: KeyboardRGB.fromJson(json['rgb']));
@@ -70,7 +70,7 @@ class KeyboardConfiguration extends Configuration {
   Map<String, dynamic> toJson() => {
         'rgb': rgb.toJson(),
         if (pr != null) 'pr': pr,
-        if (td != null) 'td': td,
+        if (td != null) 'travel_distance': td,
         if (dz != null) 'dz': dz!.toJson(),
       };
 }
@@ -99,8 +99,8 @@ class KeyboardConfigurationOptions extends ConfigurationOptions {
         prs: json['pr'] is List
             ? (json['pr'] as List).map((pr) => pr as int).toList()
             : null,
-        td: json['td']['min_value'] is num
-            ? KeyboardTravelDistanceOptions.fromJson(json['td'])
+        td: json['travel_distance']['min_value'] is num
+            ? KeyboardTravelDistanceOptions.fromJson(json['travel_distance'])
             : null,
         dz: json['dz']['min_value'] is num
             ? KeyboardDeadzoneOptions.fromJson(json['dz'])
@@ -114,7 +114,7 @@ class KeyboardConfigurationOptions extends ConfigurationOptions {
   Map<String, dynamic> toJson() => {
         'rgb': rgb.toJson(),
         if (prs != null) 'prs': prs,
-        if (td != null) 'td': td?.toJson(),
+        if (td != null) 'travel_distance': td?.toJson(),
         if (dz != null) 'dz': dz?.toJson(),
       };
 }

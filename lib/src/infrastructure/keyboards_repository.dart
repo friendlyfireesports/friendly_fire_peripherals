@@ -22,7 +22,7 @@ class LocalKeyboardsRepository extends DynamicLibraryClientConsumer
     return KeyboardConfigurationOptions.fromJson({
       'rgb': json.decode(rgbResponse.dMessage),
       'pr': json.decode(prResponse.dMessage),
-      'td': json.decode(tdResponse.dMessage),
+      'travel_distance': json.decode(tdResponse.dMessage),
       'dz': json.decode(dzResponse.dMessage),
     });
   }
@@ -40,7 +40,7 @@ class LocalKeyboardsRepository extends DynamicLibraryClientConsumer
       configuration = KeyboardConfiguration.fromJson({
         'rgb': decode(rgbData),
         'pr': decode(prData),
-        'td': decode(tdData),
+        'travel_distance': decode(tdData),
         'dz': decode(dzData),
       });
     } catch (_) {
