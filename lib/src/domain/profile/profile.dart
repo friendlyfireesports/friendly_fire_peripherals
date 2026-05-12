@@ -295,6 +295,21 @@ const defaultJson = <String, dynamic>{
         },
         "mic": {"mute": 0, "volume": 50}
       }
+    },
+    {
+      "id": "0d8c:0025",
+      "name": "Frost Shock",
+      "type": "headset",
+      "capabilities": {"supports_all": true},
+      "configuration": {
+        "speaker": {
+          "mute": 0,
+          "volume": 100,
+          "left_channel_volume": 100,
+          "right_channel_volume": 100
+        },
+        "mic": {"mute": 0, "volume": 50}
+      }
     }
   ]
 };
