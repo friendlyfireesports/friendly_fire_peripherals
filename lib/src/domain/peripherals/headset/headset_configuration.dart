@@ -112,57 +112,41 @@ class HeadsetSpeaker {
   HeadsetSpeaker({
     required this.mute,
     required this.volume,
-    required this.leftChannelVolume,
-    required this.rightChannelVolume,
   });
 
   factory HeadsetSpeaker.fromJson(Map<String, dynamic> json) => HeadsetSpeaker(
         mute: json['mute'] != 0,
         volume: json['volume'],
-        leftChannelVolume: json['left_channel_volume'],
-        rightChannelVolume: json['right_channel_volume'],
       );
 
   static HeadsetSpeaker get random => HeadsetSpeaker(
         mute: faker.randomGenerator.boolean(),
         volume: faker.randomGenerator.integer(101),
-        leftChannelVolume: faker.randomGenerator.integer(101),
-        rightChannelVolume: faker.randomGenerator.integer(101),
       );
 
   final bool mute;
   final int volume;
-  final int leftChannelVolume;
-  final int rightChannelVolume;
 
   HeadsetSpeaker copyWith({
     bool? mute,
     bool? surround,
     int? volume,
-    int? leftChannelVolume,
-    int? rightChannelVolume,
   }) =>
       HeadsetSpeaker(
         mute: mute ?? this.mute,
         volume: volume ?? this.volume,
-        leftChannelVolume: leftChannelVolume ?? this.leftChannelVolume,
-        rightChannelVolume: rightChannelVolume ?? this.rightChannelVolume,
       );
 
   HeadsetSpeaker rectified(HeadsetConfigurationOptions configurationOptions) {
     return HeadsetSpeaker(
       mute: mute,
       volume: volume.clamp(0, 100),
-      leftChannelVolume: leftChannelVolume.clamp(0, 100),
-      rightChannelVolume: rightChannelVolume.clamp(0, 100),
     );
   }
 
   Map<String, dynamic> toJson() => {
         'mute': mute ? 1 : 0,
         'volume': volume,
-        'left_channel_volume': leftChannelVolume,
-        'right_channel_volume': rightChannelVolume,
       };
 }
 
