@@ -304,9 +304,9 @@ const defaultJson = <String, dynamic>{
       "configuration": {
         "speaker": {
           "mute": 0,
-          "volume": 100,
-          "left_channel_volume": 100,
-          "right_channel_volume": 100
+          "volume": 80,
+          "left_channel_volume": 80,
+          "right_channel_volume": 80
         },
         "mic": {"mute": 0, "volume": 25}
       }
